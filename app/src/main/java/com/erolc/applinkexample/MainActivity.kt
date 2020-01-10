@@ -10,7 +10,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         findViewById<TextView>(R.id.text).setOnClickListener {
-            share(filter = WECHAT)
+            share("https://github.com/ErolC/AppLinkExample/blob/master/example.html",filter = WECHAT)
         }
     }
 }

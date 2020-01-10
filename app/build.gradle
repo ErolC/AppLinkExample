@@ -4,6 +4,17 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+def app_name = "applink"
+def signing_key_password = "YxTi9z16AK3ngl"
+
+def renameAPK(variant, defaultConfig, appName) {
+    variant.outputs.all {
+        def formattedDate = new Date().format('yyyyMMddHHmm')
+        def fileName = appName + "_" + formattedDate + ".apk"
+        outputFileName = fileName
+    }
+}
+
 android {
     compileSdkVersion 28
     buildToolsVersion "29.0.2"
@@ -15,6 +26,29 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+        release {
+            storeFile file("../project.jks")
+            storePassword "$signing_key_password"
+            keyAlias "$app_name"
+            keyPassword "$signing_key_password"
+            applicationVariants.all { variant ->
+                if (variant.buildType.name == "release") {
+                    renameAPK(variant, defaultConfig, "appLink")
+                }
+            }
+
+        }
+
+        debug {
+            storeFile file("../project.jks")
+            storePassword "$signing_key_password"
+            keyAlias "$app_name"
+            keyPassword "$signing_key_password"
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -25,7 +59,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.core:core-ktx:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
