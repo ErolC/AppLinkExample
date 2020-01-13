@@ -11,7 +11,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="从网页跳转过来跳转成功了"
+        android:text="跳转成功"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

@@ -11,17 +11,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".TargetActivity">
-            <tools:validation testUrl="http://github.com/ErolC/AppLinkExample" />
-            <intent-filter>
+            <tools:validation testUrl="https://erolc.github.io/applink" />
+            <intent-filter android:autoVerify="true"
+                tools:targetApi="m">
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:scheme="http"
-                    android:host="github.com"
-                    android:pathPattern="/ErolC/AppLinkExample" />
+                    android:scheme="https"
+                    android:host="erolc.github.io"
+                    android:pathPattern="/applink" />
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity">
