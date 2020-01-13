@@ -23,6 +23,7 @@
                     android:scheme="https"
                     android:host="erolc.github.io"
                     android:pathPattern="/applink" />
+                <data android:scheme="erolc" />
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity">
