@@ -16,16 +16,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         findViewById<TextView>(R.id.text).setOnClickListener {
-            share("https://erolc.github.io/example", filter = WECHAT_FRIENDS)
+            share("http://erolc.github.io.example")
         }
 
         findViewById<TextView>(R.id.copy).setOnClickListener {
-            val i = Intent()
-            val parse = Uri.parse("https://erolc.github.io/applink")
-            i.data = parse
-            clipboard.copyUri(object : ContentResolver(this) {
-            },parse)
-            Toast.makeText(this,"copy",Toast.LENGTH_SHORT).show()
+            copy("https://erolc.github.io/applink")
+        }
+        findViewById<TextView>(R.id.copy1).setOnClickListener {
+           copy("https://erolc.io/link")
         }
 
 
@@ -33,6 +31,14 @@ class MainActivity : AppCompatActivity() {
         i.data = Uri.parse("https://erolc.github.io/applink")
 
         Log.e("shixiangyu", i.toUri(Intent.URI_INTENT_SCHEME))
+    }
 
+    fun copy(url: String) {
+        val i = Intent()
+        val parse = Uri.parse(url)
+        i.data = parse
+        clipboard.copyUri(object : ContentResolver(this) {
+        },parse)
+        Toast.makeText(this,"copy",Toast.LENGTH_SHORT).show()
     }
 }

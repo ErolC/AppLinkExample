@@ -9,13 +9,16 @@ import android.util.Log
 import android.widget.Toast
 import java.util.ArrayList
 
-val M_IMAGE: String = "image/*"
-val M_MUSIC: String = "audio/*"
-val M_VIDEO: String = "video/*"
-val M_TEXT: String = "text/*"
-val M_APPLICATION: String = "application/*"
+const val M_IMAGE: String = "image/*"
+const val M_MUSIC: String = "audio/*"
+const val M_VIDEO: String = "video/*"
+const val M_TEXT: String = "text/*"
+const val M_APPLICATION: String = "application/*"
 
-private val weChatPackage = "com.tencent.mm.ui.tools."
+private const val weChatPackage = "com.tencent.mm.ui.tools."
+
+val ALL: (String, String) -> Boolean = { _, _ ->  true }
+
 /**
  * 微信
  */
@@ -205,7 +208,8 @@ fun Context.share(
     mimeType: String = M_TEXT,
     subject: String = "",
     uri: Uri? = null,
-    filter: (appName: String, activityName: String) -> Boolean = { _, _ -> true }
+    isDebug: Boolean = false,
+    filter: (appName: String, activityName: String) -> Boolean = ALL
 ) {
     val targeted = Intent(Intent.ACTION_SEND)
     targeted.type = mimeType
@@ -220,8 +224,10 @@ fun Context.share(
             val appName =
                 activityInfo.applicationInfo.loadLabel(applicationContext.packageManager).toString()
             val activityName = activityInfo.name
-
-
+            if (isDebug) {
+                Log.d("appName", appName)
+                Log.d("activityName", activityName)
+            }
             if (filter(
                     appName,
                     activityName

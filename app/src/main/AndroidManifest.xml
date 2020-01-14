@@ -12,8 +12,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".TargetActivity">
             <tools:validation testUrl="https://erolc.github.io/applink" />
-            <intent-filter android:autoVerify="true"
-                tools:targetApi="m">
+            <!--完整的appLinks-->
+            <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
@@ -23,7 +23,30 @@
                     android:scheme="https"
                     android:host="erolc.github.io"
                     android:pathPattern="/applink" />
-                <data android:scheme="erolc" />
+            </intent-filter>
+            <!--缺少远程文件的appLinks-->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="https"
+                    android:host="erolc.io"
+                    android:pathPattern="/link" />
+            </intent-filter>
+            <!--深层链接-->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="erolc"
+                    android:host="erolc.github.io"
+                    android:pathPattern="/link" />
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity">
